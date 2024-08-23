@@ -1,42 +1,52 @@
 import { useEffect, useState } from "react";
 import apiClient, { CanceledError } from "../services/api-client";
 
+export interface Platform {
+  id: number;
+  name: string;
+  slug: string;
+}
+
 export interface Game {
-    id: number;
-    slug: string;
-    name: string;
-    background_image: string;
+  id: number;
+  slug: string;
+  name: string;
+  background_image: string;
+  parent_platforms: { platform: Platform }[];
+  metacritic: number;
+  rating_top: number;
 }
 
 interface FetchGamesResponse {
-    count: number;
-    results: Game[];
+  count: number;
+  results: Game[];
 }
 
 const useGames = () => {
-    const [games, setGames] = useState<Game[]>([]);
-    const [error, setError] = useState<string>('');
-    const [loading, setLoading] = useState<boolean>(true);
+  const [games, setGames] = useState<Game[]>([]);
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
 
-    useEffect(() => {
-        const controller = new AbortController();
+  useEffect(() => {
+    const controller = new AbortController();
 
-        apiClient.get<FetchGamesResponse>("/games", { signal: controller.signal })
-            .then((response) => setGames(response.data.results))
-            .catch((error) => {
-                if (error instanceof CanceledError) {
-                    return console.log('Request was canceled');
-                }
+    apiClient
+      .get<FetchGamesResponse>("/games", { signal: controller.signal })
+      .then((response) => setGames(response.data.results))
+      .catch((error) => {
+        if (error instanceof CanceledError) {
+          return console.log("Request was canceled");
+        }
 
-                setError(error.message);
-            })
-            .finally(() => setLoading(false));
+        setError(error.message);
+      })
+      .finally(() => setLoading(false));
 
-        return () => controller.abort();
-    }, []);
+    return () => controller.abort();
+  }, []);
 
-    // we return the state and the setter functions so that the component can use them
-    return { games, error, loading };
-}
+  // we return the state and the setter functions so that the component can use them
+  return { games, error, loading };
+};
 
 export default useGames;
