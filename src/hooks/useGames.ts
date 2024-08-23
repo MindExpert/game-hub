@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 import apiClient, { CanceledError } from "../services/api-client";
 
-interface GameProps {
+export interface Game {
     id: number;
     slug: string;
     name: string;
+    background_image: string;
 }
 
 interface FetchGamesResponse {
     count: number;
-    results: GameProps[];
+    results: Game[];
 }
 
 const useGames = () => {
-    const [games, setGames] = useState<GameProps[]>([]);
+    const [games, setGames] = useState<Game[]>([]);
     const [error, setError] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
 

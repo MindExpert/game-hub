@@ -1,5 +1,6 @@
-import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Box, Grid, GridItem, SimpleGrid, Text } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
+import GameCard from "./GameCard";
 
 const GameGrid: React.FC = () => {
     const { games, error, loading } = useGames();
@@ -8,13 +9,16 @@ const GameGrid: React.FC = () => {
         <Box>
             {loading && <p>Loading...</p>}
             <Text color="red.500">{error}</Text>
-            <Grid templateColumns="repeat(3, 1fr)" gap={6} bg="teal">
+            <SimpleGrid columns={{
+                sm: 1,
+                md: 2,
+                lg: 3,
+                xl: 4,
+            }} spacing="20px" paddingX='10px'>
                 {games.map((game) => (
-                    <GridItem key={game.id} borderRadius="md" padding={4}>
-                        <p>{game.name}</p>
-                    </GridItem>
+                    <GameCard key={game.id} game={game} />
                 ))}
-            </Grid>
+            </SimpleGrid>
         </Box>
     );
 };

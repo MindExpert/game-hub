@@ -6,11 +6,17 @@ function App() {
 
 	return (
 		<>
-			<Grid templateAreas={{
-				base: `"nav main"`,
-				md: `"nav main"`,
-				lg: `"nav nav" "aside main"`,
-			}}>
+			<Grid
+				templateAreas={{
+					base: `"nav" "main"`,
+					md: `"nav" "main"`,
+					lg: `"nav nav" "aside main"`,
+				}}
+				templateColumns={{
+					base: '1fr',
+					lg: '250px 1fr'
+				}}
+			>
 				<GridItem gridArea="nav">
 					<NavBar />
 				</GridItem>
