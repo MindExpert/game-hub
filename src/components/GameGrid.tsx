@@ -5,7 +5,7 @@ import GameCardContainer from "./GameCardContainer";
 import GameCardSkeleton from "./GameCardSkeleton";
 
 const GameGrid: React.FC = () => {
-    const { games, error, loading } = useGames();
+    const { data, error, isLoading } = useGames();
     const skeletons = [1, 2, 3, 4, 5, 6];
 
     if (error) return <Text color="red.500">{error}</Text>;
@@ -18,12 +18,12 @@ const GameGrid: React.FC = () => {
                 lg: 3,
                 xl: 4,
             }} spacing="20px" paddingX='10px'>
-                {loading && skeletons.map((skeleton) => (
+                {isLoading && skeletons.map((skeleton) => (
                     <GameCardContainer key={skeleton}>
                         <GameCardSkeleton />
                     </GameCardContainer>
                 ))}
-                {games.map((game) => (
+                {data.map((game) => (
                     <GameCardContainer key={game.id}>
                         <GameCard game={game} />
                     </GameCardContainer>
