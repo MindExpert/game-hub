@@ -17,7 +17,7 @@ const GameGrid: React.FC = () => {
                 md: 2,
                 lg: 3,
                 xl: 4,
-            }} spacing="20px" paddingX='10px'>
+            }} spacing={3} padding='10px'>
                 {isLoading && skeletons.map((skeleton) => (
                     <GameCardContainer key={skeleton}>
                         <GameCardSkeleton />
