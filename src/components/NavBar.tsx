@@ -6,12 +6,13 @@ import SearchInput from "./SearchInput";
 
 interface Props {
     onSearch: (searchText: string) => void;
+    onIconClick: () => void
 }
 
-const NavBar: React.FC<Props> = ({ onSearch }: Props) => {
+const NavBar: React.FC<Props> = ({ onSearch, onIconClick }: Props) => {
     return (
         <HStack padding='10px'>
-            <Image src={logo} boxSize='60px' />
+            <Image src={logo} boxSize='60px' onClick={onIconClick} />
             <SearchInput onSearch={onSearch} />
             <ColorModeSwitch />
         </HStack>

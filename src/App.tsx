@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, GridItem, Show } from '@chakra-ui/react'
+import { Box, Flex, Grid, GridItem, Show, useDisclosure } from '@chakra-ui/react'
 import NavBar from './components/NavBar'
 import GameGrid from './components/GameGrid'
 import GenreList from './components/GanreList'
@@ -8,6 +8,7 @@ import PlatformSelector from './components/PlatfromSelector'
 import { Platform } from './hooks/usePlatforms'
 import SortSelector from './components/SortSelector'
 import GameHeading from './components/GameHeading'
+import MenuDrawer from './components/MenuDrawer'
 
 export interface GameQuery {
 	genre: Genre | null;
@@ -18,6 +19,15 @@ export interface GameQuery {
 
 function App() {
 	const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+	const { isOpen, onOpen, onClose } = useDisclosure()
+
+	const handleDrawerToggle = () => {
+		if (isOpen) {
+			onClose()
+		} else {
+			onOpen()
+		}
+	}
 
 	return (
 		<>
@@ -33,13 +43,19 @@ function App() {
 				}}
 			>
 				<GridItem gridArea="nav">
-					<NavBar onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })} />
+					<NavBar onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })} onIconClick={handleDrawerToggle} />
 				</GridItem>
 				<Show above="lg">
 					<GridItem gridArea="aside" paddingX={5}>
 						<GenreList selectedGenre={gameQuery.genre} onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })} />
 					</GridItem>
 				</Show>
+				<Show below='lg'>
+					<MenuDrawer isOpen={isOpen} onClose={onClose}>
+						<GenreList selectedGenre={gameQuery.genre} onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })} />
+					</MenuDrawer>
+				</Show>
+
 				<GridItem gridArea="main">
 					<Box paddingLeft={2}>
 						<GameHeading gameQuery={gameQuery} />
