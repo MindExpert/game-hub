@@ -1,12 +1,6 @@
-import genres from "../data/genres";
 import useData from "./useData";
 import { Genre } from "./useGenres";
-
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
+import { Platform } from "../hooks/usePlatforms";
 
 export interface Game {
   id: number;
@@ -56,15 +50,19 @@ export interface Game {
  * We are Using a generic data fetching hook, called useData()
  * @returns Game[]
  */
-const useGames = (selectedGenre: Genre | null) =>
+const useGames = (
+  selectedGenre: Genre | null,
+  selectedPlatform: Platform | null
+) =>
   useData<Game>(
     "/games",
     {
       params: {
         genres: selectedGenre?.id,
+        platforms: selectedPlatform?.id,
       },
     },
-    [selectedGenre?.id]
+    [selectedGenre?.id, selectedPlatform?.id]
   );
 
 export default useGames;
