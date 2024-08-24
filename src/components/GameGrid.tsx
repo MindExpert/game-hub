@@ -3,9 +3,14 @@ import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import GameCardSkeleton from "./GameCardSkeleton";
+import { Genre } from "../hooks/useGenres";
 
-const GameGrid: React.FC = () => {
-    const { data, error, isLoading } = useGames();
+interface Props {
+    selectedGenre: Genre | null
+}
+
+const GameGrid: React.FC<Props> = ({ selectedGenre }: Props) => {
+    const { data, error, isLoading } = useGames(selectedGenre);
     const skeletons = [1, 2, 3, 4, 5, 6];
 
     if (error) return <Text color="red.500">{error}</Text>;
