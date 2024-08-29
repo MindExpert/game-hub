@@ -7,12 +7,10 @@ import PlatformSelector from './components/PlatfromSelector'
 import SortSelector from './components/SortSelector'
 import GameHeading from './components/GameHeading'
 import MenuDrawer from './components/MenuDrawer'
-import Genre from './entities/Genre'
-import Platform from './entities/Platform'
 
 export interface GameQuery {
-	genre: Genre | null;
-	platform: Platform | null;
+	genreId?: number;
+	platformId?: number;
 	sortOrder: string;
 	searchText: string;
 }
@@ -45,14 +43,15 @@ function App() {
 				<GridItem gridArea="nav">
 					<NavBar onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })} onIconClick={handleDrawerToggle} />
 				</GridItem>
+
 				<Show above="lg">
 					<GridItem gridArea="aside" paddingX={5}>
-						<GenreList selectedGenre={gameQuery.genre} onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })} />
+						<GenreList selectedGenreId={gameQuery.genreId} onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genreId: genre.id })} />
 					</GridItem>
 				</Show>
 				<Show below='lg'>
 					<MenuDrawer isOpen={isOpen} onClose={onClose}>
-						<GenreList selectedGenre={gameQuery.genre} onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })} />
+						<GenreList selectedGenreId={gameQuery.genreId} onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genreId: genre.id })} />
 					</MenuDrawer>
 				</Show>
 
@@ -61,7 +60,7 @@ function App() {
 						<GameHeading gameQuery={gameQuery} />
 						<Flex marginBottom={5}>
 							<Box marginRight={5}>
-								<PlatformSelector selectedPlatform={gameQuery.platform} onSelectPlatform={(platform) => setGameQuery({ ...gameQuery, platform })} />
+								<PlatformSelector selectedPlatformId={gameQuery.platformId} onSelectPlatform={(platform) => setGameQuery({ ...gameQuery, platformId: platform.id })} />
 							</Box>
 							<SortSelector sortOrder={gameQuery.sortOrder} onSelectSortOrder={(sortOrder) => setGameQuery({ ...gameQuery, sortOrder })} />
 						</Flex>
