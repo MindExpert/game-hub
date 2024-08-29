@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosError, CanceledError, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, CanceledError, AxiosRequestConfig } from 'axios';
 
 export interface FetchResponse<T> {
     count: number;
