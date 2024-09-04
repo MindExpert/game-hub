@@ -3,7 +3,7 @@ import GameGrid from '../components/GameGrid'
 import GameHeading from '../components/GameHeading'
 import PlatformSelector from '../components/PlatformSelector'
 import SortSelector from '../components/SortSelector'
-import GanreList from '../components/GanreList'
+import GenreList from '../components/GenreList'
 import MenuDrawer from '../components/MenuDrawer'
 import useMenuDrawerStore from '../stores/useMenuDrawerStore'
 
@@ -23,12 +23,12 @@ const HomePage = () => {
         >
             <Show above="lg">
                 <GridItem area="aside" paddingX={5}>
-                    <GanreList />
+                    <GenreList />
                 </GridItem>
             </Show>
             <Show below='lg'>
                 <MenuDrawer isOpen={isOpen} onClose={toggleMenuDrawer}>
-                    <GanreList />
+                    <GenreList />
                 </MenuDrawer>
             </Show>
             <GridItem gridArea="main">

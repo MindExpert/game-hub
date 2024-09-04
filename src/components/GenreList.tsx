@@ -12,7 +12,7 @@ import getCroppedImageUrl from "../services/image-url";
 import useGameQueryStore from "../store";
 
 
-const GanreList = () => {
+const GenreList = () => {
   const { data, isLoading, error } = useGenres();
   const { selectedGenreId, setSelectedGenreId } = useGameQueryStore((state) => ({
     selectedGenreId: state.gameQuery.genreId,
@@ -54,4 +54,4 @@ const GanreList = () => {
   );
 };
 
-export default GanreList;
+export default GenreList;
