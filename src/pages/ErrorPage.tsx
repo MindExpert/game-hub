@@ -10,7 +10,7 @@ const ErrorPage = () => {
 
     return (
         <>
-            <NavBar onIconClick={() => console.log('Icon Clicked')} />
+            <NavBar />
             <Box padding={5}>
                 <Heading>Oops</Heading>
                 <Text>
