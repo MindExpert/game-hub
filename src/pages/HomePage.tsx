@@ -1,13 +1,14 @@
-import { Box, Grid, Show, GridItem, Flex, useDisclosure } from '@chakra-ui/react'
+import { Box, Grid, Show, GridItem, Flex } from '@chakra-ui/react'
 import GameGrid from '../components/GameGrid'
 import GameHeading from '../components/GameHeading'
 import PlatformSelector from '../components/PlatformSelector'
 import SortSelector from '../components/SortSelector'
 import GanreList from '../components/GanreList'
 import MenuDrawer from '../components/MenuDrawer'
+import useMenuDrawerStore from '../stores/useMenuDrawerStore'
 
 const HomePage = () => {
-    const { isOpen, onClose } = useDisclosure();
+    const { isOpen, toggleMenuDrawer } = useMenuDrawerStore();
 
     return (
         <Grid
@@ -26,7 +27,7 @@ const HomePage = () => {
                 </GridItem>
             </Show>
             <Show below='lg'>
-                <MenuDrawer isOpen={isOpen} onClose={onClose}>
+                <MenuDrawer isOpen={isOpen} onClose={toggleMenuDrawer}>
                     <GanreList />
                 </MenuDrawer>
             </Show>

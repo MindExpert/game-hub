@@ -1,17 +1,15 @@
 import { HStack, Image } from "@chakra-ui/react";
-import React from "react";
 import logo from "../assets/logo.webp";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
+import useMenuDrawerStore from "../stores/useMenuDrawerStore";
 
-interface Props {
-    onIconClick: () => void
-}
+const NavBar = () => {
+    const { toggleMenuDrawer } = useMenuDrawerStore();
 
-const NavBar: React.FC<Props> = ({ onIconClick }: Props) => {
     return (
         <HStack padding='10px'>
-            <Image src={logo} boxSize='60px' onClick={onIconClick} />
+            <Image src={logo} boxSize='60px' onClick={toggleMenuDrawer} />
             <SearchInput />
             <ColorModeSwitch />
         </HStack>
