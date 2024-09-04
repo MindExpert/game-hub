@@ -10,10 +10,12 @@ import {
 import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 import useGameQueryStore from "../store";
+import useMenuDrawerStore from "../stores/useMenuDrawerStore";
 
 
 const GenreList = () => {
   const { data, isLoading, error } = useGenres();
+  const { toggleMenuDrawer } = useMenuDrawerStore();
   const { selectedGenreId, setSelectedGenreId } = useGameQueryStore((state) => ({
     selectedGenreId: state.gameQuery.genreId,
     setSelectedGenreId: state.setGenreId,
@@ -40,7 +42,10 @@ const GenreList = () => {
                 whiteSpace="normal"
                 textAlign="left"
                 fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
-                onClick={() => setSelectedGenreId(genre.id)}
+                onClick={() => {
+                  setSelectedGenreId(genre.id);
+                  toggleMenuDrawer();
+                }}
                 fontSize="md"
                 variant="link"
               >
