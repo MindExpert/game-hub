@@ -1,15 +1,16 @@
 import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerOverlay } from '@chakra-ui/react';
 import React from 'react';
+import useMenuDrawerStore from '../stores/useMenuDrawerStore';
 
 interface MenuDrawerProps {
-  isOpen: boolean
   children: React.ReactNode;
-  onClose: () => void;
 }
 
-const MenuDrawer: React.FC<MenuDrawerProps> = ({ children, isOpen, onClose }: MenuDrawerProps) => {
+const MenuDrawer: React.FC<MenuDrawerProps> = ({ children }: MenuDrawerProps) => {
+  const { isOpen, toggleMenuDrawer } = useMenuDrawerStore();
+
   return (
-    <Drawer placement={'left'} isOpen={isOpen} onClose={onClose}>
+    <Drawer placement={'left'} isOpen={isOpen} onClose={toggleMenuDrawer}>
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />

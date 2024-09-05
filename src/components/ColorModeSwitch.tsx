@@ -41,7 +41,6 @@ const ColorModeSwitch = () => {
                     cursor='pointer'
                     w={6}
                     h={6}
-
                 />
             }
         </HStack>

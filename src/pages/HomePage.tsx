@@ -5,11 +5,8 @@ import PlatformSelector from '../components/PlatformSelector'
 import SortSelector from '../components/SortSelector'
 import GenreList from '../components/GenreList'
 import MenuDrawer from '../components/MenuDrawer'
-import useMenuDrawerStore from '../stores/useMenuDrawerStore'
 
 const HomePage = () => {
-    const { isOpen, toggleMenuDrawer } = useMenuDrawerStore();
-
     return (
         <Grid
             templateAreas={{
@@ -27,7 +24,7 @@ const HomePage = () => {
                 </GridItem>
             </Show>
             <Show below='lg'>
-                <MenuDrawer isOpen={isOpen} onClose={toggleMenuDrawer}>
+                <MenuDrawer>
                     <GenreList />
                 </MenuDrawer>
             </Show>
